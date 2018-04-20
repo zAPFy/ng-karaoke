@@ -10,28 +10,11 @@
   flex-grow: 1;
 }
 
-.player-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.player-info-song-title {
-  color: #444444;
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: .5rem;
-}
-
-.player-info-song-artist {
-  color: #5AA8CD;
-  font-size: 1rem;
-}
 
 .player-screen-lyrics {
-  background-color: #474747;
-  min-height: 200px;
+  background: linear-gradient(to bottom, #333333 0%,#444444 53%,#333333 100%);
+  min-height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,4 +26,26 @@
   flex-direction: column;
   flex-grow: 5;
   justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.player-info-song-title {
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.player-info-song-artist {
+  color: #333;
+  font-size: 1rem;
+}
+.back-button a{
+  color: #fff;
+  display: flex;
+  font-size: 3rem;
+  float: left;
+  margin-right: 2rem;
+  text-decoration: none;
 }

@@ -1,7 +1,10 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core'
+import { AfterViewInit, Component, EventEmitter, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { Location } from '@angular/common'
 import { Observable, Subscription } from 'rxjs'
 import { PlayerService } from './player.service'
-import { Song } from '../songs/song.interface';
+import { SongsService } from '../songs/songs.service'
+import { Song } from '../songs/song.interface'
 
 @Component({
   selector: 'Player',
@@ -9,18 +12,20 @@ import { Song } from '../songs/song.interface';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnChanges {
-  @Input() currentSong: Song
-  public points: number = 0
+
   public lines: string[] = []
   public onLyricsTimeUpdate = new EventEmitter<number>()
-  public onSpeechStart = new EventEmitter<boolean>()
-  private readonly POINTS_MULTIPLIER = 5
+  private currentSong: Song
 
   constructor(
-    private PlayerService: PlayerService
+    private PlayerService: PlayerService,
+    private Songs: SongsService,
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
+    this.getSong()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,13 +34,13 @@ export class PlayerComponent implements OnChanges {
     }
   }
 
-  resetPlayer() {
-    this.points = 0
-    this.lines = []
+  getSong(): void {
+    const id = +this.route.snapshot.paramMap.get('id')
+     this.Songs.getSong(id).subscribe(song => this.currentSong = song)
   }
 
-  handleAudioPlayPause(isPlaying: boolean) {
-    this.onSpeechStart.emit(isPlaying)
+  resetPlayer() {
+    this.lines = []
   }
 
   handleAudioTimeUpdate = (time: number) => {
@@ -45,13 +50,6 @@ export class PlayerComponent implements OnChanges {
   handleLyricsNewLine = (line) => {
     // Keep up to last 5 lines in array
     this.lines = [line].concat(this.lines).slice(0, 5)
-  }
-
-  handleSpeechFound(text: string) {
-    console.log('[speech match]: ', text)
-    const matches = this.PlayerService.countMatches(text, this.lines)
-
-    this.points += (matches * this.POINTS_MULTIPLIER)
   }
 
 }

@@ -33,7 +33,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-  background: linear-gradient(45deg, #4a7bcf, #6ad3cc 65%);
+  background: #fff;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   line-height: 1.4;
