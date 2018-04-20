@@ -13,6 +13,9 @@ import { LyricsComponent } from './player/lyrics/lyrics.component';
 
 import { SongSelectionComponent } from './song-selection/song-selection.component';
 
+import {MatButtonModule, MatSliderModule, MatToolbarModule, MatListModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -26,7 +29,12 @@ import { SongSelectionComponent } from './song-selection/song-selection.componen
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [
     PlayerService,

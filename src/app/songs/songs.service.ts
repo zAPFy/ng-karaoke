@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core'
 
 import { Song } from './song.interface'
-import { Observable } from 'rxjs/Observable'
-import { of } from 'rxjs/observable/of'
+import { Observable,of } from 'rxjs'
 
 @Injectable()
 export class SongsService {
@@ -17,6 +16,7 @@ export class SongsService {
       audio: 'assets/songs/music/never-gonna-give-you-up.mp3',
       lyrics: 'assets/songs/lyrics/never-gonna-give-you-up.lrc',
       lyricDelay: 1,
+      img: '/assets/images/artist-1.jpg'
     },
     {
       id: 2,
@@ -25,14 +25,16 @@ export class SongsService {
       audio: 'assets/songs/music/dont-stop-believing.mp3',
       lyrics: 'assets/songs/lyrics/dont-stop-believing.lrc',
       lyricDelay: 1,
+      img: '/assets/images/artist-2.jpg'
     },
     {
       id: 3,
       artist: 'ACDC',
       title: 'Highway to Hell',
-      audio: 'assets/songs/music/ACDC - Highway to Hell.mp3',
-      lyrics: 'assets/songs/lyrics/ACDC-Highway To Hell.lrc',
+      audio: 'assets/songs/music/ACDC-Highway-to-Hell.mp3',
+      lyrics: 'assets/songs/lyrics/ACDC-Highway-To-Hell.lrc',
       lyricDelay: 1,
+      img: ''
     },
   ]
 

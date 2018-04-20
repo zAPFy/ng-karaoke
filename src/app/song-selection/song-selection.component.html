@@ -1,11 +1,23 @@
-<ul class="songlist">
-  <li class="songlist-item" *ngFor="let song of songList" [class.songlist-item--selected]="currentSong === song">
-    <a  routerLink="/player/{{song.id}}" class="songlist-item-anchor">
-      <span class="songlist-item-avatar"></span>
-      <span class="songlist-item-details">
-        <span class="songlist-item-details-title">{{ song.title }}</span>
-        <span class="songlist-item-details-artist">{{ song.artist }}</span>
-      </span>
-    </a>
-  </li>
-</ul>
+<mat-toolbar color="primary">
+    <span>Karaoke</span>
+    <span class="example-spacer"></span>
+    <i class="fa fa-search"></i>
+</mat-toolbar>
+
+
+<mat-list>
+
+  <mat-list-item routerLink="/player/{{song.id}}" *ngFor="let song of songList" [class.songlist-item--selected]="currentSong === song">
+
+    <img *ngIf="song.img" matListAvatar [src]="song.img" [alt]="song.artist">
+    <img *ngIf="!song.img" matListAvatar src="/assets/images/default.jpg" [alt]="song.artist">
+
+    <h3 matLine> {{ song.title }} </h3>
+
+    <p matLine>
+      <span>{{ song.artist }}</span>
+    </p>
+
+  </mat-list-item>
+
+</mat-list>

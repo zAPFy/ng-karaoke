@@ -1,10 +1,13 @@
 <div class="duration">
   <span>{{ currentTime }}</span>
-  <span class="duration-divider">|</span>
+  <span class="duration-divider">
+    <mat-slider min="1" [max]="durationSeconds" step="1" [value]="currentTimeSeconds"></mat-slider>
+  </span>
   <span>{{ duration }}</span>
 </div>
 
-<button class="btnplaypause" (click)="handleAudioPlayPause()">
+<button class="btnplaypause" mat-fab (click)="handleAudioPlayPause()">
   <i class="fas fa-play" *ngIf="!isPlaying"></i>
   <i class="fas fa-pause" *ngIf="isPlaying"></i>
+
 </button>

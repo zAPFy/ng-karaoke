@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core'
-import { Observable, Subscription } from 'rxjs'
+import { Observable, Subscription, fromEvent } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { PlayerService } from '../player.service'
+
 
 @Component({
   selector: 'player-audio',
@@ -18,6 +20,8 @@ export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
   public isPlaying: boolean = false
   public currentTime: string
   public duration: string
+  public durationSeconds: number
+  public currentTimeSeconds: number
 
   constructor(
     private service: PlayerService
@@ -34,13 +38,11 @@ export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadAudioSource(this.src)
 
     // Subscribes timeupdate
-    this.timeSubscription = Observable
-      .fromEvent(this.audio, 'timeupdate')
+    this.timeSubscription = fromEvent(this.audio, 'timeupdate')
       .subscribe(this.handleAudioTimeUpdate)
 
     // Subscribe to loaded event
-    this.loadSubscription = Observable
-      .fromEvent(this.audio, 'loadeddata')
+    this.loadSubscription = fromEvent(this.audio, 'loadeddata')
       .subscribe(this.handleAudioLoaded)
 
     // Subscribe other events
@@ -79,13 +81,15 @@ export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
     this.audio.src = src
   }
 
-  handleAudioLoaded = (e: HTMLMediaElementEventMap) => {
-    this.duration = this.service.formatTime(this.audio.duration)
+  handleAudioLoaded = e => {
+    this.duration = this.service.formatTime(this.audio.duration);
+    this.durationSeconds = this.audio.duration;
   }
 
-  handleAudioTimeUpdate = (e: HTMLMediaElementEventMap) => {
-    this.currentTime = this.service.formatTime(this.audio.currentTime)
-    this.onCurrentTimeUpdate.emit(this.audio.currentTime)
+  handleAudioTimeUpdate = e => {
+    this.currentTime = this.service.formatTime(this.audio.currentTime);
+    this.currentTimeSeconds = this.audio.currentTime;
+    this.onCurrentTimeUpdate.emit(this.audio.currentTime);
   }
 
   handleAudioPlayed = () => {

@@ -5,4 +5,5 @@ export interface Song {
   lyrics: string
   audio: string
   lyricDelay: number
+  img: string
 }
