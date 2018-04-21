@@ -34,7 +34,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-  background: #fff;
+  background: linear-gradient(to bottom, #222 0%, #333 53%, #222 100%);
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   line-height: 1.4;

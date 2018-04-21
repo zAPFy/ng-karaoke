@@ -1,14 +1,19 @@
-mat-list {
-  margin: 0 auto;
-  width: 80vw;
+mat-card {
+  margin: 3vh auto;
+  width: 60vw;
 }
 mat-list-item {
   border-bottom: 1px #eee solid;
   cursor: pointer;
+  background: #fff;
 }
 mat-list-item:hover {
   background: #eee;
 }
 mat-list-item p {
   color: #5AA8CD;
+}
+mat-form-field {
+  width: 80%;
+  margin: 10px auto;
 }

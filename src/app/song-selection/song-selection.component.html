@@ -1,23 +1,28 @@
-<mat-toolbar color="primary">
-    <span>Karaoke</span>
-    <span class="example-spacer"></span>
-    <i class="fa fa-search"></i>
-</mat-toolbar>
 
+<mat-card>
 
-<mat-list>
+  <mat-form-field>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="text" placeholder="Search" [(ngModel)]="value"/>
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 
-  <mat-list-item routerLink="/player/{{song.id}}" *ngFor="let song of songList" [class.songlist-item--selected]="currentSong === song">
+  <mat-list>
 
-    <img *ngIf="song.img" matListAvatar [src]="song.img" [alt]="song.artist">
-    <img *ngIf="!song.img" matListAvatar src="/assets/images/default.jpg" [alt]="song.artist">
+    <mat-list-item routerLink="/player/{{song.id}}" *ngFor="let song of songList" [class.songlist-item--selected]="currentSong === song">
 
-    <h3 matLine> {{ song.title }} </h3>
+      <img *ngIf="song.img" matListAvatar [src]="song.img" [alt]="song.artist">
+      <img *ngIf="!song.img" matListAvatar src="/assets/images/default.jpg" [alt]="song.artist">
 
-    <p matLine>
-      <span>{{ song.artist }}</span>
-    </p>
+      <h3 matLine> {{ song.title }} </h3>
 
-  </mat-list-item>
+      <p matLine>
+        <span>{{ song.artist }}</span>
+      </p>
 
-</mat-list>
+    </mat-list-item>
+
+  </mat-list>
+</mat-card>

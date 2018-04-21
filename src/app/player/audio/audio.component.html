@@ -7,7 +7,7 @@
 </div>
 
 <button class="btnplaypause" mat-fab (click)="handleAudioPlayPause()">
-  <i class="fas fa-play" *ngIf="!isPlaying"></i>
-  <i class="fas fa-pause" *ngIf="isPlaying"></i>
+  <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
+  <mat-icon *ngIf="isPlaying">pause</mat-icon>
 
 </button>
