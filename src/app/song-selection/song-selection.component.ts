@@ -1,21 +1,21 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Song } from '../songs/song.interface';
 import { SongsService } from '../songs/songs.service';
 
 @Component({
-  selector: 'song-selection',
+  selector: 'app-song-selection',
   templateUrl: './song-selection.component.html',
   styleUrls: ['./song-selection.component.css']
 })
 export class SongSelectionComponent implements OnInit {
 
-  songList: Song[]
-  currentSong: Song
+  songList: Song[];
+  currentSong: Song;
 
-  constructor( private Songs: SongsService ) { }
+  constructor(private Songs: SongsService) { }
 
   ngOnInit() {
-    this.songList = this.Songs.getSongList()
+    this.songList = this.Songs.getSongList();
   }
 
 }

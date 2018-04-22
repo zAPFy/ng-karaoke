@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Song } from './songs/song.interface'
-import './natural'
+import { Song } from './songs/song.interface';
+import './natural';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,11 @@ import './natural'
 })
 export class AppComponent {
 
-  public songList: Song[] = []
-  public currentSong: Song
+  public songList: Song[] = [];
+  public currentSong: Song;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {
-
-  }
 
 
 }

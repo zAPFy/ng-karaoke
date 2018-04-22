@@ -1,84 +1,84 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core'
-import { Observable, Subscription, fromEvent } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { PlayerService } from '../player.service'
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { Observable, Subscription, fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PlayerService } from '../player.service';
 
 
 @Component({
-  selector: 'player-audio',
+  selector: 'app-player-audio',
   templateUrl: './audio.component.html',
   styleUrls: ['./audio.component.css']
 })
-export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AudioComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
 
-  @Output() onCurrentTimeUpdate = new EventEmitter<number>()
-  @Output() onPlayPause = new EventEmitter<boolean>()
-  @Input() src: string = ''
-  private audio: HTMLAudioElement
-  private timeSubscription: Subscription
-  private loadSubscription: Subscription
-  public isPlaying: boolean = false
-  public currentTime: string
-  public duration: string
-  public durationSeconds: number
-  public currentTimeSeconds: number
+  @Output() onCurrentTimeUpdate = new EventEmitter<number>();
+  @Output() PlayPause = new EventEmitter<boolean>();
+  @Input() src = '';
+  private audio: HTMLAudioElement;
+  private timeSubscription: Subscription;
+  private loadSubscription: Subscription;
+  public isPlaying = false;
+  public currentTime: string;
+  public duration: string;
+  public durationSeconds: number;
+  public currentTimeSeconds: number;
 
   constructor(
     private service: PlayerService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.audio = this.initAudio()
-    this.currentTime = this.service.formatTime(0)
-    this.duration = this.service.formatTime(0)
+    this.audio = this.initAudio();
+    this.currentTime = this.service.formatTime(0);
+    this.duration = this.service.formatTime(0);
   }
 
   ngAfterViewInit() {
     // Loads new audio source
-    this.loadAudioSource(this.src)
+    this.loadAudioSource(this.src);
 
     // Subscribes timeupdate
     this.timeSubscription = fromEvent(this.audio, 'timeupdate')
-      .subscribe(this.handleAudioTimeUpdate)
+      .subscribe(this.handleAudioTimeUpdate);
 
     // Subscribe to loaded event
     this.loadSubscription = fromEvent(this.audio, 'loadeddata')
-      .subscribe(this.handleAudioLoaded)
+      .subscribe(this.handleAudioLoaded);
 
     // Subscribe other events
-    this.audio.addEventListener('playing', this.handleAudioPlayed)
-    this.audio.addEventListener('pause', this.handleAudioPaused)
+    this.audio.addEventListener('playing', this.handleAudioPlayed);
+    this.audio.addEventListener('pause', this.handleAudioPaused);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.service.hasPropertyChanged(changes.src)) {
-      this.loadAudioSource(changes.src.currentValue)
+      this.loadAudioSource(changes.src.currentValue);
     }
   }
 
   ngOnDestroy() {
     // Unsubscribe
-    this.timeSubscription.unsubscribe()
-    this.loadSubscription.unsubscribe()
+    this.timeSubscription.unsubscribe();
+    this.loadSubscription.unsubscribe();
 
     // Destroy audio tag
-    this.loadAudioSource('')
-    this.audio.load()
+    this.loadAudioSource('');
+    this.audio.load();
   }
 
   initAudio(): HTMLAudioElement {
-    const audio = new Audio()
-    audio['autobuffer'] = true
-    audio.autoplay = false
-    audio.preload = 'auto'
+    const audio = new Audio();
+    audio['autobuffer'] = true;
+    audio.autoplay = false;
+    audio.preload = 'auto';
 
-    return audio
+    return audio;
   }
 
   loadAudioSource(src: string) {
-    this.audio.pause()
-    this.handleAudioPaused()
-    this.audio.src = src
+    this.audio.pause();
+    this.handleAudioPaused();
+    this.audio.src = src;
   }
 
   handleAudioLoaded = e => {
@@ -93,20 +93,20 @@ export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleAudioPlayed = () => {
-    this.onPlayPause.emit(true)
-    this.isPlaying = true
+    this.PlayPause.emit(true);
+    this.isPlaying = true;
   }
 
   handleAudioPaused = () => {
-    this.onPlayPause.emit(false)
-    this.isPlaying = false
+    this.PlayPause.emit(false);
+    this.isPlaying = false;
   }
 
   handleAudioPlayPause() {
     if (this.audio.paused) {
-      this.audio.play()
+      this.audio.play();
     } else {
-      this.audio.pause()
+      this.audio.pause();
     }
   }
 

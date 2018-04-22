@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 
-import { Song } from './song.interface'
-import { Observable,of } from 'rxjs'
+import { Song } from './song.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class SongsService {
@@ -39,10 +39,10 @@ export class SongsService {
   ]
 
   getSongList() {
-    return this.songList
+    return this.songList;
   }
 
-  getSong( id: number ): Observable<Song> {
+  getSong(id: number): Observable<Song> {
     return of(this.songList.find(song => song.id === id));
   }
 

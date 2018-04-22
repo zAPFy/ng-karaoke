@@ -11,20 +11,20 @@
 
   <div class="player-screen">
     <div class="player-screen-lyrics p1">
-      <player-lyrics
+      <app-player-lyrics
         [src]="currentSong.lyrics"
         [delay]="currentSong.lyricDelay"
         [onCurrentTimeUpdate]="onLyricsTimeUpdate"
-        (onNewLine)="handleLyricsNewLine($event)"
-        ></player-lyrics>
+        (NewLine)="handleLyricsNewLine($event)"
+        ></app-player-lyrics>
     </div>
 
     <div class="player-screen-controls">
 
-      <player-audio
+      <app-player-audio
         [src]="currentSong.audio"
         (onCurrentTimeUpdate)="handleAudioTimeUpdate($event)"
-        ></player-audio>
+        ></app-player-audio>
 
     </div>
   </div>

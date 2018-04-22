@@ -1,9 +1,9 @@
-import { SimpleChange } from '@angular/core'
+import { SimpleChange } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Observable, Scheduler, Subject, Subscription } from 'rxjs'
-import { scan, map, withLatestFrom, distinctUntilChanged } from 'rxjs/operators'
+import { Observable, Scheduler, Subject, Subscription } from 'rxjs';
+import { scan, map, withLatestFrom, distinctUntilChanged } from 'rxjs/operators';
 
-const { Metaphone, SoundEx } = window['natural']
+const { Metaphone, SoundEx } = window['natural'];
 
 @Injectable()
 export class PlayerService {
@@ -18,7 +18,7 @@ export class PlayerService {
    * @memberOf PlayerService
    */
   hasPropertyChanged(change: SimpleChange): boolean {
-    return !change.firstChange && change.previousValue !== change.currentValue
+    return !change.firstChange && change.previousValue !== change.currentValue;
   }
 
   /**
@@ -29,11 +29,11 @@ export class PlayerService {
    *
    * @memberOf PlayerService
    */
-  formatTime(secs: number|string): string {
-    const secsNum = parseInt(secs.toString(), 10)
-    const hours = Math.floor(secsNum / 3600) % 24
-    const minutes = Math.floor(secsNum / 60) % 60
-    const seconds = secsNum % 60
+  formatTime(secs: number | string): string {
+    const secsNum = parseInt(secs.toString(), 10);
+    const hours = Math.floor(secsNum / 3600) % 24;
+    const minutes = Math.floor(secsNum / 60) % 60;
+    const seconds = secsNum % 60;
 
     return [hours, minutes, seconds]
       .map((num) => (num < 10)
@@ -43,7 +43,7 @@ export class PlayerService {
       .filter((num, i) => (
         (num !== '00') || (i > 0))
       )
-      .join(':')
+      .join(':');
   }
 
 

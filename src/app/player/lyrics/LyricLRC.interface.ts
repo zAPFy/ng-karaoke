@@ -1,10 +1,10 @@
 export interface LyricLRC {
-  ti: string
-  ar: string
-  lines: LineLRC[],
+  ti: string;
+  ar: string;
+  lines: LineLRC[];
 }
 
 export interface LineLRC {
-  text: string
-  time: number
+  text: string;
+  time: number;
 }

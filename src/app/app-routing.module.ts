@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { PlayerComponent } from './player/player.component'
-import { SongSelectionComponent } from './song-selection/song-selection.component'
+import { PlayerComponent } from './player/player.component';
+import { SongSelectionComponent } from './song-selection/song-selection.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/songs', pathMatch: 'full' },
@@ -11,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  exports: [ RouterModule ],
-  imports: [ RouterModule.forRoot(routes) ]
+  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)]
 })
 export class AppRoutingModule { }
